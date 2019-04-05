@@ -1,0 +1,3 @@
+﻿  Source.cpp
+d:\git projects\c++\coding\stringproblems\source.cpp(15): warning C4018: '<': signed/unsigned mismatch
+  stringProblems.vcxproj -> D:\git projects\C++\coding\Debug\stringProblems.exe
