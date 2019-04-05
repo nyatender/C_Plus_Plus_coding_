@@ -1,0 +1,5 @@
+﻿  arr.cpp
+d:\test project\problems\advaced_data_structure\arr.cpp(12): warning C4018: '<': signed/unsigned mismatch
+d:\test project\problems\advaced_data_structure\arr.cpp(52): warning C4091: 'typedef ': ignored on left of 'Parent' when no variable is declared
+d:\test project\problems\advaced_data_structure\arr.cpp(137): warning C4018: '<': signed/unsigned mismatch
+  Advaced_data_structure.vcxproj -> D:\Test Project\problems\Debug\Advaced_data_structure.exe
