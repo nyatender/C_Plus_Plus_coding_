@@ -13,8 +13,6 @@ enum GENDER {
 
 class User
 {
-	//for simplicity all are public
-	//we can expose public methods to encapsulate behaviour
 	std::string name;
 	int age;
 	int height;
@@ -60,13 +58,14 @@ class SocialNetwork
 public:
 	void addUser(User user)
 	{
-		unordered_map<int, User>mMap;
-		mMap.insert({ user.getId(), user });
-
+		//Maintin a map with user id and user object
 		serachById.insert({ user.getId(), user });
+		//Maintain a mutimap_map for age and id
 		serachByAge.insert(std::pair<int, int>(user.getAge(), user.getId()));
+		//Maintain a mutimap_map for name and id
 		serachByName.insert(std::pair<std::string, int>(user.getName(), user.getId()));
 
+		//Maintain a mutimap_map for hobbies and id
 		for (auto it = user.gethobbies().begin(); it != user.gethobbies().end(); it++)
 			serachByHobbies.insert(std::pair<string, int>(*it, user.getId()));
 	}
@@ -85,6 +84,7 @@ public:
 	}
 	void deleteUser(User &user)
 	{
+		//Remove user from all map if it exist in any map/multimap with id
 		auto it = serachById.find(user.getId());
 		if (it != serachById.end())
 		{
@@ -212,12 +212,6 @@ private:
 	unordered_multimap<std::string, int>serachByName;
 	unordered_multimap<std::string, int>serachByHobbies;
 };
-
-int i = 100;
-int getid()
-{
-	return i++;
-}
 
 void displayIDs(vector<int>ids)
 {
