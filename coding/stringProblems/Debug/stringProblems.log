@@ -1,4 +1,11 @@
-﻿  anagram.cpp
-d:\git projects\c++\coding\stringproblems\anagram.cpp(28): warning C4018: '<': signed/unsigned mismatch
-d:\git projects\c++\coding\stringproblems\anagram.cpp(35): warning C4018: '<': signed/unsigned mismatch
-  stringProblems.vcxproj -> D:\git projects\C++\coding\Debug\stringProblems.exe
+﻿  splitNameString.cpp
+d:\git projects\c++\coding\stringproblems\splitnamestring.cpp(22): error C2664: 'void foo(int &)': cannot convert argument 1 from '_Ty' to 'int &'
+          with
+          [
+              _Ty=int
+          ]
+  d:\git projects\c++\coding\stringproblems\splitnamestring.cpp(42): note: see reference to function template instantiation 'void relay<int>(T &&)' being compiled
+          with
+          [
+              T=int
+          ]

@@ -1,0 +1,89 @@
+#include "arr.h"
+
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+
+int smallest(string arr) {
+	int index = 0;
+	int small = arr[0];
+	for (int i = 1; i < arr.length(); i++) {
+		if (small > arr[i]) {
+			small = arr[i];
+			index = i;
+		}
+	}
+	return index;
+}
+
+void smallestNumUtils(string arr, int &s, int &e) {
+
+	if (arr.length() == 1)
+		return;
+
+	int pos = smallest(arr);
+	if (pos == 0) {
+		s = s + 1;
+		smallestNumUtils(arr.substr(1, arr.length()-1), s, e);
+	}
+	else {
+		e = s + pos;
+	}
+
+	return;
+}
+
+void smallestNum(string arr) { //Minimum one swap to make number smaller possible.
+	int start = 0;
+	int end = 0;
+	smallestNumUtils(arr, start, end);
+	cout << arr[start] << "  " << arr[end] << endl;
+}
+
+bool countNoOfCycleUtils(int arr[], bool visited[], int &count, int i, int s) {
+	if (visited[i] == true && s == i) {
+		count++;
+		return true;
+	}
+	else if (!visited[i]) {
+		visited[i] = true;
+		if(countNoOfCycleUtils(arr, visited, count, arr[i], s))
+			return true;
+		else {
+			visited[i] = false;
+			return false;
+		}
+	}
+	return false;
+}
+
+int countNoOfCycle(int arr[], int n) {
+	int count = 0;
+	bool *visited = new bool[n] {0};	
+	for (int i = 0; i < n; i++) {
+		if (arr[i] > n - 1)
+			return -1;
+			visited[i] = countNoOfCycleUtils(arr, visited, count, i, i);
+	}
+	for (int i = 0; i < n; i++) {
+		if(!visited[i] && arr[i] != 0)
+			count++;
+	}
+
+	return count;
+}
+
+
+int main() {
+	//string arr = "26475";
+	//smallestNum(arr);
+	//int arr[] = {2, 3, 1, 1, 2, 0};
+	int arr[] = { 2, 1, 0 };
+	cout << countNoOfCycle(arr, 3);
+
+	getchar();
+
+	return 0;
+}

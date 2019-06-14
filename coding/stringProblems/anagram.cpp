@@ -39,10 +39,29 @@ int minimumNeeded(string str1, string str2)
 	return count;
 }
 
+//Check if binary representations of two numbers are anagram
+bool isBinaryRepresentationsAnagram(int a, int b)
+{
+	int count1 = 0;
+	int count2 = 0;
+	int count = 0;
+	int totalBits = sizeof(int) * 8;
+	for (int i = 0; i < totalBits; i++)
+	{
+		if (1 << i & a)
+			count1++;
+		if (1 << i & b)
+			count2++;
+	}
+	count = count1 - count2;
+	return (count == 0);
+}
+
 int main()
 {
-	cout << "minimum needs to remove is " << minimumNeeded("cddgk", "cdh");
-
+	//cout << "minimum needs to remove is " << minimumNeeded("cddgk", "cdh");
+	cout << (isBinaryRepresentationsAnagram(8, 4) ? " Yes " : " No ") << endl;
+	cout << (isBinaryRepresentationsAnagram(4, 5) ? " Yes " : " No ") << endl;
 	getchar();
 	return 0;
 }

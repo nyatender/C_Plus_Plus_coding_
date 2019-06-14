@@ -1,0 +1,14 @@
+﻿  Controller.cpp
+d:\test project\problems\trademildesign\controller.cpp(36): error C2061: syntax error: identifier 'CustomProgram'
+d:\test project\problems\trademildesign\controller.cpp(64): error C2143: syntax error: missing ';' before '*'
+d:\test project\problems\trademildesign\controller.cpp(64): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+d:\test project\problems\trademildesign\controller.cpp(64): error C2238: unexpected token(s) preceding ';'
+d:\test project\problems\trademildesign\controller.cpp(34): error C2065: 'CusProg': undeclared identifier
+d:\test project\problems\trademildesign\controller.cpp(34): error C2061: syntax error: identifier 'CustomProgram'
+d:\test project\problems\trademildesign\controller.cpp(37): error C2065: 'CusProg': undeclared identifier
+d:\test project\problems\trademildesign\controller.cpp(38): error C2065: 'CusProg': undeclared identifier
+d:\test project\problems\trademildesign\controller.cpp(38): error C2541: 'delete': cannot delete objects that are not pointers
+d:\test project\problems\trademildesign\controller.cpp(39): error C2039: 'CusProg': is not a member of 'Controller'
+  d:\test project\problems\trademildesign\controller.cpp(31): note: see declaration of 'Controller'
+d:\test project\problems\trademildesign\controller.cpp(39): error C2065: 'CusProg': undeclared identifier
+d:\test project\problems\trademildesign\controller.cpp(50): error C2065: 'CusProg': undeclared identifier

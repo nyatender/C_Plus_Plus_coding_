@@ -1,0 +1,172 @@
+
+
+#include <vector>
+#include <thread>
+#include <iostream>
+#include <memory>
+#include <future>
+#include <queue>
+#include <set>
+#include <condition_variable>
+
+
+using namespace std;
+
+mutex mu;
+queue<int>Q;
+condition_variable cond;
+
+int threadFun(std::shared_future<int>f) {
+	int N = f.get();
+	int res = 0;
+	for (int i = 0; i < N;i++)
+		res += i;
+
+	return res;
+}
+
+void cosumer() {
+	int data = 0;
+	while (data != 1) {
+		//std::unique_lock<mutex>lock(mu);
+		//cond.wait(lock, []() {return !Q.empty();});
+		data = Q.back();
+		Q.pop();			
+		//lock.unlock();			
+	}
+
+}
+
+void producer() {
+
+	int i = 10;
+	while (i > 0) {
+		//std::unique_lock<mutex>lock(mu);			
+		Q.push(i);
+		//lock.unlock();
+		//cond.notify_all();
+		//std::this_thread::sleep_for(std::chrono::microseconds(100));
+		//i--;
+		//}
+	}
+}
+
+void swap(int *a, int *b) {
+	int t = *a;
+	*a = *b;
+	*b = t;
+}
+
+int Pivot(int arr[], int l, int n) {
+	int s = -1;
+	int pivot = arr[n];
+
+	for (int i = l; i < n-1; i++) {
+		if (pivot >= arr[i]) {
+			s++;
+			swap(&arr[s], &arr[i]);
+		}
+	}
+	s++;
+	swap(arr[s], arr[n]);
+	return s;
+}
+
+void QuickSort(int arr[], int l, int high) {
+	if (l < high) {
+		int pivot = Pivot(arr, l, high);
+		QuickSort(arr, 0, pivot);
+		QuickSort(arr, pivot+1, high);
+	}
+}
+
+class moveStep {
+	int position;
+	set<int>Tiles;
+	set<int>::iterator it;
+	int count;
+public :
+	moveStep(int N, int pos) :position(pos) {
+		for (int i = 0; i < N; i++) {
+			Tiles.insert(i);
+		}
+		it = Tiles.find(pos);
+		count = 2;
+	}
+	int getposition() {
+		return *it;
+	}
+	void moveleft() {
+		if (it == Tiles.begin())
+			return;
+		set<int>::iterator itLeft = it;
+		bool isDelete = true;
+		while (count-- > 0) {			
+			if (itLeft == Tiles.begin() && count > 0) {
+				itLeft = it;
+				isDelete = false;
+				break;
+			}
+			else
+				itLeft--;
+		}
+		if (isDelete == true)
+			Tiles.erase(it);
+		it = itLeft;
+		count = 2;
+	}
+	void moveRight() {
+		if (it == Tiles.end())
+			return;
+		set<int>::iterator itRight = it;
+		bool isDelete = true;
+		while (count-- > 0) {
+			if (itRight == Tiles.end() && count > 0) {
+				itRight = it;
+				isDelete = false;
+				break;
+			}
+			else
+				itRight++;
+		}		
+		if (isDelete == true)
+			Tiles.erase(it);
+		it = itRight;
+		count = 2;
+	}
+};
+
+
+int main() {
+	/*promise<int>p;
+	future<int>f = p.get_future();
+	shared_future<int>sf = f.share();
+	future<int>fu = std::async(std::launch::async, threadFun,sf);
+	future<int>fu1 = std::async(std::launch::async, threadFun, sf);*/
+
+	int arr[] = { 10,11,2,33,4,25 };
+	int n = 6;
+	QuickSort(arr, 0, n-1);
+	for (int i = 0; i < n; i++)
+		cout << arr[i] << " ";
+
+	/*moveStep obj(6, 3);
+	obj.moveleft();
+	cout << "moveLeft" << endl;
+	cout << obj.getposition() << endl;
+
+	obj.moveRight();
+	cout << "moveRight" << endl;
+	cout << obj.getposition() << endl;
+
+	obj.moveleft();
+	cout << "moveLeft" << endl;
+	cout << obj.getposition() << endl;
+
+	obj.moveRight();
+	cout << "moveRight" << endl;
+	cout << obj.getposition() << endl;*/
+
+	getchar();
+	return 0;
+}

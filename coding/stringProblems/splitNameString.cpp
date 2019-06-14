@@ -1,38 +1,46 @@
-//
-//
-//#include <iostream>
-//#include <vector>
-//
-//using namespace std;
-//
-//void SplitStr(std::string str)
-//{
-//	if (str.empty())
-//		return;
-//
-//	int i = 0;
-//	vector<int>pos;
-//	while (++i < str.size())
-//	{
-//		if(str[i] >= 'A' && str[i] <= 'Z')
-//			pos.push_back(i);
-//	}
-//	pos.push_back(i);
-//	i = 0;
-//	for (auto a = pos.begin(); a != pos.end(); a++)
-//	{
-//		cout << str.substr(i, (*a - i)).c_str() << " ";
-//		i = *a;
-//	}
-//}
-//
-//int main()
-//{
-//
-//	//split the world in a meaningful name 
-//	string name = "YatenderSinghNegi";
-//	SplitStr(name);
-//
-//	getchar();
-//	return 0;
-//}
+
+
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+void foo(int& arg)
+{
+	cout << arg;
+}
+
+template<class T>
+T&& forward(typename remove_reference<T>::type& arg)
+{
+	return static_cast<T&&>(arg);
+}
+
+template<typename T>
+void relay(T&& arg)
+{
+	foo(std::forward<T>(arg));
+}
+
+void print(int arg)
+{
+	cout << arg << endl;
+}
+
+template<typename T, typename... types>
+void print(const T &first, const types... args)
+{
+	cout << first << endl;
+	print(args...);
+}
+
+int main()
+{
+	print(4);
+	int i = 9;
+	relay(i);
+	relay(10);
+
+	getchar();
+	return 0;
+}
